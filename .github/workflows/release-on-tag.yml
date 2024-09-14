@@ -30,3 +30,7 @@ jobs:
       with:
         name: material-cursors
         path: material_*cursors*.tar.gz
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "material_*cursors*.tar.gz"
