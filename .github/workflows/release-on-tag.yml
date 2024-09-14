@@ -2,7 +2,7 @@ name: Release on tag
 
 on:
   push:
-    branches: "master"
+    tags: [ "*" ]
 
 jobs:
   build-and-release:
@@ -25,9 +25,13 @@ jobs:
     - name: Generate tar-files
       run: make dist/material_*cursors
 
-    # Шаг 6: Хранение артефактов сборки
-      - name: Store build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: material_*cursors*.tar.gz
+    - name: Upload tar files as artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: material-cursors
+        path: material_*cursors*.tar.gz
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "material_*cursors*.tar.gz"
+
