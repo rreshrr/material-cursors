@@ -24,6 +24,9 @@ jobs:
     - name: Generate tar-files
       run: make dist/material_*cursors
 
-    - uses: ncipollo/release-action@v1
-      with:
-        artifacts: "material_*cursors*.tar.gz"
+    # Шаг 6: Хранение артефактов сборки
+      - name: Store build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: material_*cursors*.tar.gz
